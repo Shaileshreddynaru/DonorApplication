@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.DonorApp.DonorApplication.DonorApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 65.047 s - in com.DonorApp.DonorApplication.DonorApplicationTests
