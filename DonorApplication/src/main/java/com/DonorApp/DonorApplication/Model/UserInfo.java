@@ -13,8 +13,8 @@ import java.lang.*;
 
 
 
-public class User {
-    public User() {
+public class UserInfo {
+    public UserInfo() {
     }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,7 +40,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public User(int loginid, String username, String password) {
+    public UserInfo(int loginid, String username, String password) {
         super();
         this.loginid = loginid;
         this.username = username;

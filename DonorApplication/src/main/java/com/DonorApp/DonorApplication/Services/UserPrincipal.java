@@ -2,18 +2,16 @@ package com.DonorApp.DonorApplication.Services;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Optional;
 
+import com.DonorApp.DonorApplication.Model.UserInfo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.DonorApp.DonorApplication.Model.User;
-
 public class UserPrincipal implements UserDetails{
-    private User user;
-    public UserPrincipal(User user) {
-        this.user=user;
+    private UserInfo userInfo;
+    public UserPrincipal(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -24,13 +22,13 @@ public class UserPrincipal implements UserDetails{
     @Override
     public String getPassword() {
         // TODO Auto-generated method stub
-        return user.getPassword();
+        return userInfo.getPassword();
     }
 
     @Override
     public String getUsername() {
         // TODO Auto-generated method stub
-        return user.getUsername();
+        return userInfo.getUsername();
     }
 
     @Override

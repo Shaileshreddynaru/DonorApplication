@@ -1,38 +1,22 @@
 package com.DonorApp.DonorApplication.Controller;
 
-import java.util.List;
-
+import com.DonorApp.DonorApplication.Model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.DonorApp.DonorApplication.DTO.DonorDto;
 import com.DonorApp.DonorApplication.DTO.UserDto;
-import com.DonorApp.DonorApplication.Model.Donors;
-import com.DonorApp.DonorApplication.Model.Posts;
-import com.DonorApp.DonorApplication.Model.User;
 import com.DonorApp.DonorApplication.Services.DonService;
 import com.DonorApp.DonorApplication.Services.JWTService;
-import com.DonorApp.DonorApplication.conf.JwtFilter;
-import com.DonorApp.DonorApplication.repo.DonRepo;
-import com.DonorApp.DonorApplication.repo.PostRepo;
 import com.DonorApp.DonorApplication.repo.UserRepo;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -52,13 +36,13 @@ public class LoginController {
 
     @PostMapping(" ")
 
-    public ResponseEntity<String> login(@RequestBody User user, HttpSession session) {
+    public ResponseEntity<String> login(@RequestBody UserInfo userInfo, HttpSession session) {
 
 
 
-        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(userInfo.getUsername(), userInfo.getPassword()));
         if (authentication.isAuthenticated()) {
-            String token=jwtService.generateToken(user.getUsername());
+            String token=jwtService.generateToken(userInfo.getUsername());
             return ResponseEntity.ok(token);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("invalid");

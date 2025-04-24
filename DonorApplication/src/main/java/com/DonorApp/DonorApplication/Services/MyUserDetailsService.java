@@ -1,14 +1,12 @@
 package com.DonorApp.DonorApplication.Services;
 
-import java.util.Optional;
-
+import com.DonorApp.DonorApplication.Model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.DonorApp.DonorApplication.Model.User;
 import com.DonorApp.DonorApplication.repo.UserRepo;
 
 @Service
@@ -21,12 +19,12 @@ public class MyUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // TODO Auto-generated method stub
 
-        User user=repo.findByUsername(username);
-        if(user==null) {
+        UserInfo userInfo =repo.findByUsername(username);
+        if(userInfo ==null) {
             System.out.println("no found");
-            throw new UsernameNotFoundException("user no fount");
+            throw new UsernameNotFoundException("userInfo no fount");
         }
-        return new UserPrincipal(user);
+        return new UserPrincipal(userInfo);
     }
 
 }
